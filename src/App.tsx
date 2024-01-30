@@ -1,11 +1,15 @@
 import React, { memo } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { TabNavigation } from './navigation';
+
+import { AppearanceProvider } from './context';
+import { MainNavigation } from './navigation/MainNavigation';
 
 export const App = memo(() => {
   return (
-    <NavigationContainer>
-      <TabNavigation />
-    </NavigationContainer>
+    <AppearanceProvider>
+      <NavigationContainer>
+        <MainNavigation />
+      </NavigationContainer>
+    </AppearanceProvider>
   );
 });
