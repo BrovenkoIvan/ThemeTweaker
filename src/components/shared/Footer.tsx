@@ -8,21 +8,21 @@ interface BottomProps {
   handleSave: () => void;
 }
 
-export const Bottom = memo<BottomProps>(({ handleCancel, handleSave }) => {
+export const Footer = memo<BottomProps>(({ handleCancel, handleSave }) => {
   const { bottom } = useSafeAreaInsets();
   return (
-    <BottomContainer>
-      <BottomBtn $marginBottom={bottom} activeOpacity={0.9} onPress={handleCancel}>
+    <Container>
+      <Button $marginBottom={bottom} activeOpacity={0.9} onPress={handleCancel}>
         <UIText>Cancel</UIText>
-      </BottomBtn>
-      <BottomBtn $marginBottom={bottom} activeOpacity={0.9} onPress={handleSave}>
+      </Button>
+      <Button $marginBottom={bottom} activeOpacity={0.9} onPress={handleSave}>
         <UIText>Save</UIText>
-      </BottomBtn>
-    </BottomContainer>
+      </Button>
+    </Container>
   );
 });
 
-const BottomContainer = styled.View`
+const Container = styled.View`
   flex-direction: row;
   background-color: ${props => props.theme.secondary};
   gap: 1px;
@@ -34,7 +34,7 @@ interface BottomBtnProps {
   $marginBottom: number;
 }
 
-const BottomBtn = styled.TouchableOpacity<BottomBtnProps>`
+const Button = styled.TouchableOpacity<BottomBtnProps>`
   flex: 1;
   align-items: center;
   padding: 10px 0px ${props => props.$marginBottom + 10 ?? 8}px 0px;

@@ -2,7 +2,7 @@ import React, { memo, useCallback, useState } from 'react';
 import styled from 'styled-components/native';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { useAppearance } from '../context';
-import { Bottom, UIText } from '../components/shared';
+import { Footer, UIText } from '../components/shared';
 import { UIBackGroundImage } from '../components/shared/UIBackgroundImage';
 import { useNavigation } from '@react-navigation/native';
 
@@ -56,7 +56,7 @@ export const CustomizeBackgroundScreen = memo(() => {
           </Section>
         )}
       </Container>
-      <Bottom handleCancel={handleCancel} handleSave={handleSave} />
+      <Footer handleCancel={handleCancel} handleSave={handleSave} />
     </>
   );
 });

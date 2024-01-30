@@ -4,7 +4,7 @@ import Slider from '@react-native-community/slider';
 import { useTheme } from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
 import { useAppearance } from '../../context';
-import { Bottom, UIText } from '../../components/shared';
+import { Footer, UIText } from '../../components/shared';
 import { FontFamilyItem } from './components/FontFamilyItem';
 import { fontFamilies, fontSizes } from '../../constants';
 
@@ -57,7 +57,7 @@ export const CustomizeFontScreen = memo(() => {
           />
         ))}
       </Container>
-      <Bottom handleCancel={handleCancel} handleSave={handleSave} />
+      <Footer handleCancel={handleCancel} handleSave={handleSave} />
     </>
   );
 });

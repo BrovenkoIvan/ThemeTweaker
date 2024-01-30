@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import { SvgHome } from '../assets';
 import { useTheme } from 'styled-components';
 import { iconsColors, iconsSizes } from '../constants';
-import { Bottom, UIText } from '../components/shared';
+import { Footer, UIText } from '../components/shared';
 import { useNavigation } from '@react-navigation/native';
 import { useAppearance } from '../context';
 import { darkTheme, lightTheme } from '../theme';
@@ -65,7 +65,7 @@ export const CustomizeIconsScreen = memo(() => {
           </Button>
         </Section>
       </Container>
-      <Bottom handleCancel={handleCancel} handleSave={handleSave} />
+      <Footer handleCancel={handleCancel} handleSave={handleSave} />
     </>
   );
 });
