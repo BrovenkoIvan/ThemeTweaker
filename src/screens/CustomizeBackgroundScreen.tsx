@@ -60,6 +60,7 @@ export const CustomizeBackgroundScreen = memo(() => {
     </>
   );
 });
+
 const Container = styled.View`
   flex: 1;
   background-color: ${props => props.theme.background};
