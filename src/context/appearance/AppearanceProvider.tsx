@@ -12,7 +12,7 @@ export const AppearanceProvider = memo<PropsWithChildren>(({ children }) => {
   const [backgroundImageUri, setBackgroundImageUri] = useState<string | null>('');
 
   const [appearanceConfig, setAppearanceConfig] = useState<AppearanceConfig>({
-    theme: colorScheme || 'light',
+    theme: colorScheme ?? 'light',
     fontSize: fontSizes.sm,
     fontFamily: Platform.OS == 'ios' ? 'san Francisco' : 'Roboto',
     iconsSize: iconsSizes.default,
