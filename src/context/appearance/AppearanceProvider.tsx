@@ -37,6 +37,11 @@ export const AppearanceProvider = memo<PropsWithChildren>(({ children }) => {
   const theme = {
     ...(appearanceConfig.theme === 'light' ? lightTheme : darkTheme),
     ...appearanceConfig,
+    iconsColor: appearanceConfig.iconsColor
+      ? appearanceConfig.iconsColor
+      : appearanceConfig.theme === 'light'
+      ? lightTheme.iconsColor
+      : darkTheme.iconsColor,
   };
 
   const saveBackgroundImageUri = useCallback(async (backgroundImageUri: string) => {

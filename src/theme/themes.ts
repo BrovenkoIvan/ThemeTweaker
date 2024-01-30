@@ -4,6 +4,7 @@ import { fontSizes } from '../constants/font-sizes';
 import { iconsSizes } from '../constants';
 
 export const lightTheme: DefaultTheme = {
+  theme: 'light',
   background: '#f6f6f6',
   text: '#333333',
   selectedText: '#2196F3',
@@ -17,6 +18,7 @@ export const lightTheme: DefaultTheme = {
 };
 
 export const darkTheme: DefaultTheme = {
+  theme: 'dark',
   background: '#212129',
   text: '#E5E5EA',
   selectedText: '#2196F3',

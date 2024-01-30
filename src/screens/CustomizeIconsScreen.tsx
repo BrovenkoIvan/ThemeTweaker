@@ -1,11 +1,12 @@
 import React, { memo, useCallback, useState } from 'react';
-import styled, { css } from 'styled-components/native';
+import styled from 'styled-components/native';
 import { SvgHome } from '../assets';
 import { useTheme } from 'styled-components';
 import { iconsColors, iconsSizes } from '../constants';
 import { Bottom, UIText } from '../components/shared';
 import { useNavigation } from '@react-navigation/native';
 import { useAppearance } from '../context';
+import { darkTheme, lightTheme } from '../theme';
 
 export const CustomizeIconsScreen = memo(() => {
   const theme = useTheme();
@@ -24,6 +25,14 @@ export const CustomizeIconsScreen = memo(() => {
       iconsColor: selectedColor,
     });
   }, [selectedSize, selectedColor, updateAppearanceConfig]);
+
+  const handleDefaultIconStyle = useCallback(() => {
+    updateAppearanceConfig({
+      iconsColor: undefined,
+    });
+    setSelectedColor(theme.theme === 'light' ? lightTheme.iconsColor : darkTheme.iconsColor);
+    setSelectedSize(lightTheme.iconsSize);
+  }, [theme, updateAppearanceConfig]);
 
   return (
     <>
@@ -50,6 +59,11 @@ export const CustomizeIconsScreen = memo(() => {
             </IconContainer>
           ))}
         </IconsContainer>
+        <Section>
+          <Button onPress={handleDefaultIconStyle}>
+            <UIText>Default</UIText>
+          </Button>
+        </Section>
       </Container>
       <Bottom handleCancel={handleCancel} handleSave={handleSave} />
     </>
@@ -82,4 +96,18 @@ const IconContainer = styled.TouchableOpacity<IconSizeContainerProps>`
   align-items: center;
   justify-content: center;
   border: 2px solid ${props => (props.$selected ? props.theme.selectedText : props.theme.secondary)};
+`;
+
+const Section = styled.View`
+  margin: 12px 0px 0px 0px;
+  border-radius: 8px;
+  padding: 10px 4px 10px 10px;
+  background-color: ${props => props.theme.secondary};
+  gap: 10px;
+`;
+
+const Button = styled.TouchableOpacity`
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
 `;
