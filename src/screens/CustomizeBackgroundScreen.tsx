@@ -1,12 +1,25 @@
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import styled from 'styled-components/native';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { useAppearance } from '../context';
-import { UIText } from '../components/shared';
+import { Bottom, UIText } from '../components/shared';
 import { UIBackGroundImage } from '../components/shared/UIBackgroundImage';
+import { useNavigation } from '@react-navigation/native';
 
 export const CustomizeBackgroundScreen = memo(() => {
+  const navigation = useNavigation();
   const { saveBackgroundImageUri, backgroundImageUri, removeBackgroundImageUri } = useAppearance();
+  const [selectedBackgroundImage, setSelectedBackgroundImage] = useState<string | undefined>('');
+
+  const handleSave = useCallback(() => {
+    if (selectedBackgroundImage) {
+      saveBackgroundImageUri(selectedBackgroundImage);
+    }
+  }, [saveBackgroundImageUri, selectedBackgroundImage]);
+
+  const handleCancel = useCallback(() => {
+    navigation.canGoBack() && navigation.goBack();
+  }, [navigation]);
 
   const handleChooseBackgroundImage = useCallback(() => {
     launchImageLibrary({ selectionLimit: 1, mediaType: 'photo', includeBase64: true }, res => {
@@ -15,25 +28,36 @@ export const CustomizeBackgroundScreen = memo(() => {
       } else if (res.errorCode) {
         console.log('ImagePickerError: ', res.errorMessage);
       } else {
-        saveBackgroundImageUri(res.assets[0].uri);
+        if (res.assets && res.assets.length > 0) {
+          setSelectedBackgroundImage(res.assets[0].uri);
+        }
       }
     });
-  }, [saveBackgroundImageUri]);
+  }, []);
 
   return (
-    <Container>
-      <UIBackGroundImage backgroundImageUri={backgroundImageUri} />
-      <Section>
-        <Button onPress={handleChooseBackgroundImage}>
-          <Text>Select background image</Text>
-        </Button>
-      </Section>
-      <Section>
-        <Button onPress={removeBackgroundImageUri}>
-          <Text style={{ color: '#FF453A' }}>Remove background image</Text>
-        </Button>
-      </Section>
-    </Container>
+    <>
+      <Container>
+        <UIBackGroundImage
+          backgroundImageUri={
+            selectedBackgroundImage ? selectedBackgroundImage : backgroundImageUri
+          }
+        />
+        <Section>
+          <Button onPress={handleChooseBackgroundImage}>
+            <Text>Select background image</Text>
+          </Button>
+        </Section>
+        {backgroundImageUri && (
+          <Section>
+            <Button onPress={removeBackgroundImageUri}>
+              <Text style={{ color: '#FF453A' }}>Remove background image</Text>
+            </Button>
+          </Section>
+        )}
+      </Container>
+      <Bottom handleCancel={handleCancel} handleSave={handleSave} />
+    </>
   );
 });
 const Container = styled.View`

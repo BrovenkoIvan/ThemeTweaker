@@ -71,7 +71,7 @@ export const SettingsScreen = memo(() => {
       </Section>
       <Section>
         <Button onPress={handleCustomizeBackground}>
-          <UIText>Choose background</UIText>
+          <UIText>Select background</UIText>
           <SvgChevron />
         </Button>
       </Section>
